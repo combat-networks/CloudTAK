@@ -32,13 +32,14 @@ RUN cd web \
 RUN npm run lint \
     && npm run build \
     && if [ "$USE_LOCAL_ZIP" = "true" ]; then \
-        cp data.zip data.zip.tmp; \
+    cp data.zip data.zip.tmp; \
     else \
-        wget -O data.zip.tmp "$DATA_SOURCE_URL"; \
+    wget -O data.zip.tmp "$DATA_SOURCE_URL"; \
     fi \
     && unzip data.zip.tmp \
     && mkdir -p dist/data \
     && cp -r CloudTAK-Data-*/* dist/data/ \
-    && rm -rf data.zip.tmp CloudTAK-Data-*
+    && rm -rf data.zip.tmp CloudTAK-Data-* \
+    && chmod +x ./start
 
-CMD ["./start"]
+CMD ["/bin/bash", "/home/etl/api/start"]

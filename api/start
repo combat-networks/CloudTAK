@@ -16,4 +16,3 @@ do
     npm run prod
     echo "FATAL ERROR: Code: $?"
 done
-
